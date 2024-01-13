@@ -12,7 +12,7 @@ const { config: envConfig } = require('dotenv');
 
 
 // config and middlewares
-if(process.env.ENV !== 'PRODUCTION') envConfig()
+envConfig()
 connectDb();
 app.use(morgan('dev'));
 app.use(cors());
