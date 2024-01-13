@@ -10,12 +10,14 @@ class UserController {
       properties["username"] = req.body.username;
       properties["email"] = req.body.email;
       properties["password"] = req.body.password;
-
+      properties["date_of_birth"] = req.body.date_of_birth
+      properties["preferences"] = req.body.preferences
+      
       const data = await User.create(properties);
 
       return res
         .status(201)
-        .json({ data: data, message: "success register", status: "success" });
+        .json({ message: "success register", status: "success" });
     } catch (error) {
       next(error);
     }
@@ -23,7 +25,7 @@ class UserController {
 
   static async login(req, res, next) {
     try {
-      const foundUser = await User.findOne({ email: req.body.email }).exec();
+      const foundUser = await User.findOne({ username: req.body.username }).exec();
 
       if (foundUser && comparePassword(req.body.password, foundUser.password)) {
         const tokenPayload = {

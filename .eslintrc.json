@@ -1,0 +1,36 @@
+{
+  "env": {
+    "es2020": true,
+    "node": true
+  },
+  "extends": [
+    "standard"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 11
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "unused-imports"
+  ],
+  "rules": {
+    "no-useless-constructor": "warn",
+    "unused-imports/no-unused-imports": "error",
+    "camelcase": 0,
+    "semi-style": [
+      "error",
+      "last"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-unused-vars": "warn",
+    "no-use-before-define":"off",
+    "indent": [
+      "warn",
+      2
+    ]
+  }
+}
