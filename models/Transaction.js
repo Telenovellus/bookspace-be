@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { hashPassword } = require('../helper/hash');
 const { isEmail } = require('validator');
 
-const userSchema = new mongoose.Schema({
+const transactionSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -18,16 +18,13 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    // select: false,
   },
   type: {
     type: String,
     enum : ['EXTERNAL','INTERNAL'],
     default: 'EXTERNAL'
-  },
-  preferences: [String],
-  date_of_birth: {
-    type: Date,
-  },
+},
   created_at: {
     type: Date,
     default: new Date().toISOString(),
@@ -38,12 +35,5 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre('save', function (next) {
-  this.avatar = `https://avatars.dicebear.com/api/miniavs/${this.username}.svg`;
 
-  this.password = hashPassword(this.password);
-
-  next();
-});
-
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Transaction', transactionSchema);

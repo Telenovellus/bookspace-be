@@ -10,7 +10,6 @@ router.route('/api/v1/login').post(UserController.login);
 
 router.route('/api/v1/register').post(UserController.register);
 
-// route-route yang membutuhkan authentikasi (login)
 router
   .route('/api/v1/users')
   .get(userAuthentication, UserController.findAllUser);
