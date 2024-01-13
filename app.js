@@ -7,13 +7,13 @@ const router = require('./routes/index');
 const http = require('http');
 const server = http.createServer(app);
 const errorHandler = require('./middlewares/errorHandler');
-const { config: envConfig } = require('dotenv');
 
 
 
 // config and middlewares
+console.log(process.env);
 if(process.env.ENVIRONMENT.toString() != 'PRODUCTION') {
-  envConfig()
+  require('dotenv').configDotenv()
 } else {
   console.log('loaded os env');
 }
