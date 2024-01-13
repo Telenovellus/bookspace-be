@@ -5,18 +5,19 @@ const storage = require('firebase/storage')
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAlIiRTn62M5n7t0NUtL9JTeGIzHrbN9uw",
-  authDomain: "bookspace-be.firebaseapp.com",
-  projectId: "bookspace-be",
-  storageBucket: "bookspace-be.appspot.com",
-  messagingSenderId: "712888873922",
-  appId: "1:712888873922:web:98c73159a9e5429b8c9c5b"
-};
 
 // Initialize Firebase
 
-module.exports = () => {
+module.exports = (env) => {
+    const firebaseConfig = {
+        apiKey: env.FIREBASE_API_KEY,
+        authDomain: env.FIREBASE_AUTH_DOMAIN,
+        projectId: env.FIRBASE_PROJECT_ID,
+        storageBucket: env.FIREBASE_STORAGE_BUCKET,
+        messagingSenderId:env.FIREBASE_MESSAGING_SENDER_ID,
+        appId: env.FIREBASE_APP_ID
+      };
+      
     initializeApp(firebaseConfig);
     console.log('Init Firebase');
 }

@@ -18,7 +18,7 @@ if(process.env.ENVIRONMENT?.toString() != 'PRODUCTION') {
 }
 
 connectDb();
-initFirebase();
+initFirebase(process.env);
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
