@@ -6,7 +6,7 @@
   "scripts": {
     "start-dev": "npx nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "export ENV=PRODUCTION && node server.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
