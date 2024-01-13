@@ -3,6 +3,26 @@ const { comparePassword } = require("../helper/hash");
 const { generateToken } = require("../helper/jwt");
 
 class UserController {
+
+  static async checkUsername(req, res, next) {
+    try {
+      const found = await User.findOne({ username: req.body.username })
+
+      if(found) {
+        throw {
+          status: 400,
+          message: 'username already taken',
+          data: false
+        }
+      }
+
+      return res
+        .status(200)
+        .json({ message: "username available", status: "success", data: true });
+    } catch (error) {
+      next(error);
+    }
+  }
  
   static async register(req, res, next) {
     try {
@@ -12,6 +32,7 @@ class UserController {
       properties["password"] = req.body.password;
       properties["date_of_birth"] = req.body.date_of_birth
       properties["preferences"] = req.body.preferences
+      properties["name"] = req.body.name
       
       const data = await User.create(properties);
 
