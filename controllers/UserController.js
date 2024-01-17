@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const { comparePassword } = require("../helper/hash");
 const { generateToken } = require("../helper/jwt");
+const moment = require('moment')
 
 class UserController {
 
@@ -30,7 +31,7 @@ class UserController {
       properties["username"] = req.body.username;
       properties["email"] = req.body.email;
       properties["password"] = req.body.password;
-      properties["date_of_birth"] = req.body.date_of_birth
+      properties["date_of_birth"] = moment(req.body.date_of_birth, 'DD/MM/YYYY').toISOString()
       properties["preferences"] = req.body.preferences
       properties["name"] = req.body.name
       
