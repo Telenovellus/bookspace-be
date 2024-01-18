@@ -47,7 +47,10 @@ router.route('/book-collection/request')
 router.route('/book-collection/request/:user_id')
   .get(userAuthentication, CollectionController.getListRequestByUserId)
 
-  router.route('/book-collection/donation/:user_id')
+router.route('/book-collection/request/get-login-data')
+  .get(userAuthentication, CollectionController.getListRequestByUserId)
+
+router.route('/book-collection/donation/get-login-data')
   .get(userAuthentication, CollectionController.getListDonationByUserId)
 
 module.exports = router;

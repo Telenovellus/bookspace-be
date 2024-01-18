@@ -16,10 +16,23 @@ class CollectionController {
     }
   }
 
+  static async getListRequestByLoggedUser(req, res, next) {
+    try {
+        const userId = req.loggedUser.id 
+        const bookRequest = await Collection.find({ user_id: userId, action_type: 'REQUEST' })
+
+      return res
+        .status(200)
+        .json({ message: "book collection request data", status: "success", data: { rows: bookRequest, count: bookRequest.length } });
+    } catch (error) {
+      next(error);
+    }
+  }
+
 
   static async createRequest(req, res, next) {
     try {
-        const imageUrl = await uploadImage(req.file)
+        const imageUrl = await uploadImage(req.body.image_url_base64)
 
         const payload = {
             action_type: 'REQUEST',
@@ -52,6 +65,19 @@ class CollectionController {
   static async getListDonationByUserId(req, res, next) {
     try {
         const bookDonations = await Collection.find({ user_id: req.params.user_id, action_type: 'DONATION' })
+
+      return res
+        .status(200)
+        .json({ message: "book collection donation data", status: "success", data: { rows: bookDonations, count: bookDonations.length } });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getListDonationByLogged(req, res, next) {
+    try {
+        const userId = req.loggedUser.id
+        const bookDonations = await Collection.find({ user_id: userId, action_type: 'DONATION' })
 
       return res
         .status(200)
