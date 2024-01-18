@@ -1,4 +1,4 @@
-const { getStorage, ref, getDownloadURL, uploadBytesResumable } = require("firebase/storage")
+const { getStorage, ref, getDownloadURL, uploadBytesResumable, uploadString } = require("firebase/storage")
 
 async function uploadImage(file) {
     try {
@@ -6,13 +6,9 @@ async function uploadImage(file) {
 
         const storageRef = ref(storage, `bookspace-image/${file.originalname + "       " + new Date().toISOString()}`);
 
-        // Create file metadata including the content type
-        const metadata = {
-            contentType: file.mimetype,
-        };
-
         // Upload the file in the bucket storage
-        const snapshot = await uploadBytesResumable(storageRef, file.buffer, metadata);
+        const snapshot = await uploadString(storageRef, file, 'data_url')
+        console.log('snapshot', { snapshot });
         //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
 
         // Grab the public url
